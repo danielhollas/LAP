@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import numpy as np
-import scipy.optimize as opt
+try:
+    import scipy.optimize as opt
+except:
+    print("Scipy module not found :(")
 import argparse
 import sys
 
@@ -11,12 +14,13 @@ def read_cmd():
    parser.add_argument('input_file',metavar="Input_file",default='cost_matrix.dat',
          help='Text file containing input cost matrix.')
    parser.add_argument('-a','--algoritm',dest='alg',default='scipy',required = False,
-         help='LAP algoritm.')
+         help='LAP algoritm. (scipy or max_heur)')
    return parser.parse_args()
 
 
 def hungary(cost):
    """Use Hungarian algorithm implemented in scipy."""
+   # The scipy function computes minimum, but we want maximum
    cost = -cost
    return opt.linear_sum_assignment(cost)
 
@@ -33,7 +37,7 @@ def solve_matrix_2x2(cost):
 
 
 def get_original_index(row_ind, col_ind, rows, cols):
-   """See function stupid_heuristic to make sense of this"""
+   """See function max_heuristic to make sense of this"""
    if len(rows) == 0:
       return row_ind, col_ind
 
@@ -110,12 +114,11 @@ if cost_matrix.ndim != 2:
 nrow = cost_matrix.shape[0]
 ncol = cost_matrix.shape[1]
 if nrow != ncol:
-   print("ERROR: Non-rectagular matrix detectes")
+   print("ERROR: Non-rectagular matrix detected!")
    sys.exit(1)
 
 # Here we go
 if algorithm == 'scipy':
-   # The scipy function computes minimum, but we want maximum
    row_ind, col_ind = hungary(cost_matrix)
 
 elif algorithm == 'max_heur':
