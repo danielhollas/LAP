@@ -6,6 +6,14 @@ except:
     print("Scipy module not found :(")
 import argparse
 import sys
+import time
+
+day_of_month = time.strftime("%d")
+month = time.strftime("%m")
+
+if day_of_month == "25" and month == "05":
+    print("Don't forget to bring your towel! #towelday")
+
 
 def read_cmd():
    """A function for reading command line options."""
