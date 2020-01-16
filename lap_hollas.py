@@ -37,7 +37,7 @@ def solve_matrix_2x2(cost):
    nrow = cost.shape[0]
    ncol = cost.shape[1]
    if nrow != 2 and ncol != 2:
-      print("ERROR: solve_matrix_2x2 only work for 2x2 matrices!")
+      print("ERROR: solve_matrix_2x2 only works for 2x2 matrices!")
       sys.exit(1)
    sum1 = cost[0][1] + cost[1][0]
    sum2 = cost[0][0] + cost[1][1]
@@ -61,7 +61,7 @@ def get_original_index(row_ind, col_ind, rows, cols):
 
 
 def max_heuristic(cost):
-   """Simply go for the maximum values!"""
+   """Simply go for maximum values!"""
    nrow = cost.shape[0]
    ncol = cost.shape[1]
 
@@ -133,7 +133,7 @@ elif algorithm == 'max_heur':
    row_ind, col_ind = max_heuristic(cost_matrix)
 
 else:
-   print("ERROR: Invalid algoritm.")
+   print("ERROR: Invalid algorithm.")
 
 
 print("Column indeces:")
@@ -144,3 +144,4 @@ print(row_ind)
 solution = cost_matrix[row_ind, col_ind].sum()
 
 print("Maximum sum = ", str(solution))
+
